@@ -9,24 +9,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
-// Annotations
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
-public class Account {
+public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private int id;
-    private double balance;
+    private int sourceAccount;
+    private int targetAccount;
+    private double amount;
     private enum currency{
         EURO,
         US_DOLAR,
         GB_POUND
     };
-    private String createdAt;
 }
+
+
+

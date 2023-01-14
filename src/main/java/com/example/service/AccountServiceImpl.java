@@ -6,11 +6,14 @@ import com.example.repository.AccountRepository;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AccountServiceImpl
     implements AccountService{
+
 
     @Autowired
     private AccountRepository accountRepository;
@@ -33,5 +36,20 @@ public class AccountServiceImpl
     @Override
     public Account fettchAccountById(int id) {
         return null;
+    }
+
+    @Override
+    public boolean evalAccount(int account) {
+        System.out.println("perii");
+        long ac = account;
+
+        accountRepository.findById(ac);
+
+        return false;
+    }
+
+    @Override
+    public boolean evalAmount(double amount) {
+        return false;
     }
 }

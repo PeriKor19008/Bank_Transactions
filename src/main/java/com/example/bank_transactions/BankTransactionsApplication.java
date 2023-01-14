@@ -1,8 +1,11 @@
 package com.example.bank_transactions;
 
 import com.example.entity.Account;
+import com.example.entity.Transaction;
 import com.example.service.AccountService;
 
+import com.example.service.AccountServiceImpl;
+import com.example.service.TransactionService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +19,10 @@ import org.springframework.web.bind.annotation.*;
 public class BankTransactionsApplication {
 
     // Annotation
-    @Autowired private AccountService accountService;
+
+    private TransactionService transactionService = new TransactionService();
+    private AccountServiceImpl accountService = new AccountServiceImpl();
+
     public static void main(String[] args) {
 
         SpringApplication.run(BankTransactionsApplication.class, args);
@@ -30,12 +36,14 @@ public class BankTransactionsApplication {
     public String transfer(@PathVariable int src,@PathVariable int tar, @PathVariable double amm ){
         return String.format("SRC->%d Tar->%d AMM->%f",src,tar,amm);
     }
+    @RequestMapping(value = "/transaction",method =RequestMethod.POST)
+    public void transaction(@RequestBody Transaction transaction){
+        transactionService.getTransaction(transaction);
+    }
 
-    /*@GetMapping(value ="/all_accounts" )
-    public List<Account> fetchAccountList()
-    {
-        return accountService.fetchAccountList();
-    }*/
+
+
+
     @GetMapping(value="/accounts")
     public List<Account> fetchAccountList()
     {
