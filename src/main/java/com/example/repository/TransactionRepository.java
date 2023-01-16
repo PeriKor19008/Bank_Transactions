@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TransactionRepository
-        extends JpaRepository<Transaction, Long> {
-     int makeTransaction(Transaction transaction);
+        extends JpaRepository<Transaction, Integer> {
 }
 

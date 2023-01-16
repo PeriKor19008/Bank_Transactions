@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;
 // Annotation
 @Repository
 public interface AccountRepository
-        extends JpaRepository<Account, Long> {
+        extends JpaRepository<Account, Integer> {
+
 
 
 }
