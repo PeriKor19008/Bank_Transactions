@@ -5,6 +5,8 @@ import com.example.service.BankTransactionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 
 @RestController
 public class BankTransactionsController {
@@ -18,11 +20,11 @@ public class BankTransactionsController {
 
 
     @Autowired
-    public BankTransactionsController(BankTransactionServiceImpl bankTransactionService){
+    public BankTransactionsController(BankTransactionServiceImpl bankTransactionService) {
         this.bankTransactionService = bankTransactionService;
     }
     @PostMapping(value = "/transaction")
-    public void transaction(@RequestBody TransactionDto transaction){
+    public void transaction(@Valid @RequestBody TransactionDto transaction) {
         bankTransactionService.getTransaction(transaction);
     }
 

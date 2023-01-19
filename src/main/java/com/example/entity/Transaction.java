@@ -25,7 +25,7 @@ public class Transaction {
     private int targetAccount;
     @NotNull
     private double amount;
-    private enum currency{
+    private enum currency {
         EURO,
         US_DOLAR,
         GB_POUND

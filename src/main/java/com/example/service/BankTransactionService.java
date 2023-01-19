@@ -1,11 +1,14 @@
 package com.example.service;
 
 import com.example.dto.TransactionDto;
+import com.example.entity.Account;
+
+import java.util.List;
 
 public interface BankTransactionService {
-    public TransactionDto getTransaction(TransactionDto transaction);
-    public int evalTransaction(TransactionDto transaction);
-    public int makeTransaction(TransactionDto transactionDto);
-    public boolean evalAccount(int accId);
-    public boolean evalAmount(double amount);
+    TransactionDto getTransaction(TransactionDto transaction);
+    int evalTransaction(TransactionDto transaction);
+    int makeTransaction(TransactionDto transactionDto);
+    List<Account> evalAccount(int sourceId,int targetId);
+
 }

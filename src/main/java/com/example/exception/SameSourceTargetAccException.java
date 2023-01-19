@@ -5,9 +5,6 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class IncorectAccountIdException
-    extends RuntimeException {
-
-    private String message;
-
+public class SameSourceTargetAccException extends RuntimeException{
+   private String message;
 }
