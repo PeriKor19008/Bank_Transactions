@@ -1,4 +1,5 @@
 package com.example.entity;
+import com.example.utils.Currency;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,26 +14,24 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
-    private int id;
-    @NotNull
-    private int sourceAccount;
-    @NotNull
-    private int targetAccount;
-    @NotNull
-    private double amount;
-    private enum currency {
-        EURO,
-        US_DOLAR,
-        GB_POUND
-    }
 
-    @OneToMany (mappedBy = "transaction")
-    private List<Account> accountList;
+    @Column(name = "id",nullable = false)
+    private int id;
+    @Column(nullable = false, name = "sourceAccount")
+    private int sourceAccount;
+
+    @Column(nullable = false, name = "targetAccount")
+    private int targetAccount;
+
+    @Column(nullable = false, name = "amount")
+    private double amount;
+
+    @Column(nullable = false, name="currency")
+    private Currency currency;
+
 }
 
 
