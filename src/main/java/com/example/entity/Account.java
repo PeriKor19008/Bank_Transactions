@@ -1,16 +1,12 @@
 package com.example.entity;
-
-import javax.validation.constraints.NotNull;
-
 import com.example.utils.Currency;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 import lombok.NoArgsConstructor;
 
-
-import javax.persistence.*;
 
 
 
@@ -21,6 +17,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Entity
+@Table
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +30,7 @@ public class Account {
     @Column(nullable = false, name="currency")
     private Currency currency;
 
-    @Column(nullable = false, name="createdAt")
+    @Column(nullable = false, name="createdat")
     private String createdAt;
 
 

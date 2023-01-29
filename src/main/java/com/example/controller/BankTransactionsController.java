@@ -25,7 +25,8 @@ public class BankTransactionsController {
     }
     @PostMapping(value = "/transaction")
     public void transaction(@Valid @RequestBody TransactionDto transaction) {
-        bankTransactionService.getTransaction(transaction);
+
+        bankTransactionService.evalTransaction(transaction);
     }
 
 

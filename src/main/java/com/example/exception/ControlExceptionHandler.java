@@ -9,20 +9,20 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class ControlExceptionHandler
-    extends ResponseEntityExceptionHandler {
+public class ControlExceptionHandler {
 
     @ExceptionHandler({IncorectAccountIdException.class,InsufficientAmountException.class, SameSourceTargetAccException.class})
     public ResponseEntity<Object>
-    incorectAccountIdException(IncorectAccountIdException ex, WebRequest request) {
-        String bodyOfResponse = "Transaction unsuccessful";
-        return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.CONFLICT, request);
+    incorectAccountIdException(RuntimeException ex, WebRequest request) {
+        String bodyOfResponse = ex.getMessage();
+
+        return new ResponseEntity<>(bodyOfResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object>
-    unexpectedException(IncorectAccountIdException ex, WebRequest request) {
+    unexpectedException(Exception ex, WebRequest request) {
         String bodyOfResponse = "An exception was thrown";
-        return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.CONFLICT, request);
+        return new ResponseEntity<>(bodyOfResponse,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

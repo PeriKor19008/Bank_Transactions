@@ -27,10 +27,11 @@ public class BankTransactionServiceImpl implements BankTransactionService {
         int sourceId=transaction.getSourceAccount();
         int targetId=transaction.getTargetAccount();
         if(sourceId==targetId)
-            throw new SameSourceTargetAccException("same source and target account");
+            throw new SameSourceTargetAccException();
+        System.out.println(sourceId);
         List<Account> accounts = evalAccount(sourceId,targetId);
         if (accounts.get(0).getBalance()< transaction.getAmount()){
-            throw new InsufficientAmountException("Insufficient balance");
+            throw new InsufficientAmountException();
         }
         else {
             return makeTransaction(transaction);
@@ -40,12 +41,15 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 
     @Override
     public List<Account> evalAccount(int sourceId, int targetId){
+        System.out.println(sourceId);
         Optional<Account> source = accountRepository.findById(sourceId);
+
         Optional<Account> target = accountRepository.findById(targetId);
+
         if (source.isEmpty())
-            throw new IncorectAccountIdException("Source");
+            throw new IncorectAccountIdException();
         else if (target.isEmpty())
-            throw new IncorectAccountIdException("Target");
+            throw new IncorectAccountIdException();
         List<Account> accounts = new ArrayList<>();
         accounts.add(source.get());
         accounts.add(target.get());
@@ -60,6 +64,8 @@ public class BankTransactionServiceImpl implements BankTransactionService {
         //at the database. We should just post the transaction
         //and let the account changes due to the transaction
         //happen from a trigger on insert at the transaction table
+
+        System.out.println("make transaction");
         return 0;
     }
 }
