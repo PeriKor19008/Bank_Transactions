@@ -30,7 +30,7 @@ public class Account {
     @Column(nullable = false, name="currency")
     private Currency currency;
 
-    @Column(nullable = false, name="createdat")
+    @Column(nullable = false, name="createdAt")
     private String createdAt;
 
 
