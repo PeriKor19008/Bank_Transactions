@@ -6,6 +6,7 @@ import com.example.exception.IncorectAccountIdException;
 import com.example.exception.InsufficientAmountException;
 import com.example.exception.SameSourceTargetAccException;
 import com.example.repository.AccountRepository;
+import com.example.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,8 @@ import java.util.Optional;
 public class BankTransactionServiceImpl implements BankTransactionService {
     @Autowired
     private AccountRepository accountRepository;
+    @Autowired
+    private TransactionRepository transactionRepository;
     @Override
     public TransactionDto getTransaction(TransactionDto transaction) {
         System.out.println(transaction);
@@ -28,34 +31,34 @@ public class BankTransactionServiceImpl implements BankTransactionService {
         int targetId=transaction.getTargetAccount();
         if(sourceId==targetId)
             throw new SameSourceTargetAccException();
-        System.out.println(sourceId);
-        List<Account> accounts = evalAccount(sourceId,targetId);
-        if (accounts.get(0).getBalance()< transaction.getAmount()){
-            throw new InsufficientAmountException();
-        }
-        else {
-            return makeTransaction(transaction);
-        }
-    }
 
 
-    @Override
-    public List<Account> evalAccount(int sourceId, int targetId){
-        System.out.println(sourceId);
+        //eval accounts
         Optional<Account> source = accountRepository.findById(sourceId);
-
         Optional<Account> target = accountRepository.findById(targetId);
 
         if (source.isEmpty())
             throw new IncorectAccountIdException();
         else if (target.isEmpty())
             throw new IncorectAccountIdException();
-        List<Account> accounts = new ArrayList<>();
-        accounts.add(source.get());
-        accounts.add(target.get());
-        return accounts;
 
+        Account sourceAccount=source.get();
+        Account targetAccount=target.get();
+
+
+
+        if (sourceAccount.getBalance()< transaction.getAmount()){
+            throw new InsufficientAmountException();
+        }
+        else {
+            //make transaction
+
+            return makeTransaction(transaction);
+        }
     }
+
+
+
 
 
     @Override

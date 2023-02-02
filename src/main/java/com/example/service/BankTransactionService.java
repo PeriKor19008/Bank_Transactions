@@ -9,6 +9,6 @@ public interface BankTransactionService {
     TransactionDto getTransaction(TransactionDto transaction);
     int evalTransaction(TransactionDto transaction);
     int makeTransaction(TransactionDto transactionDto);
-    List<Account> evalAccount(int sourceId,int targetId);
+    /*List<Account> evalAccount(int sourceId,int targetId);*/
 
 }

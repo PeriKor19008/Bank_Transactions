@@ -1,5 +1,6 @@
 package com.example.dto;
 
+import com.example.utils.Currency;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,11 +18,8 @@ public class TransactionDto {
     private int targetAccount;
     @NotNull
     private double amount;
-    private enum currency {
-        EURO,
-        US_DOLAR,
-        GB_POUND
-    }
+
+    private Currency currency;
     public double getAmountByDollar(){
         // place holder
         // it should return amount converted in dolars

@@ -16,8 +16,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
-@Table
+@Entity (name="Account")
+
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,9 +28,10 @@ public class Account {
     private double balance;
 
     @Column(nullable = false, name="currency")
+    @Enumerated (EnumType.STRING)
     private Currency currency;
 
-    @Column(nullable = false, name="createdAt")
+    @Column(nullable = false, name="createdat")
     private String createdAt;
 
 
