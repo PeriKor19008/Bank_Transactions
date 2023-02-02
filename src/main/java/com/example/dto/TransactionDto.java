@@ -26,5 +26,7 @@ public class TransactionDto {
         return amount;
     }
 
-
+    public String getCurrencyName() {
+        return currency.name();
+    }
 }

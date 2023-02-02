@@ -2,11 +2,13 @@ package com.example.service;
 
 import com.example.dto.TransactionDto;
 import com.example.entity.Account;
+import com.example.entity.Transaction;
 import com.example.exception.IncorectAccountIdException;
 import com.example.exception.InsufficientAmountException;
 import com.example.exception.SameSourceTargetAccException;
 import com.example.repository.AccountRepository;
 import com.example.repository.TransactionRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,7 @@ public class BankTransactionServiceImpl implements BankTransactionService {
         return transaction;
     }
     @Override
+    @Transactional
     public int evalTransaction(TransactionDto transaction) {
         int sourceId=transaction.getSourceAccount();
         int targetId=transaction.getTargetAccount();
@@ -52,8 +55,18 @@ public class BankTransactionServiceImpl implements BankTransactionService {
         }
         else {
             //make transaction
-
-            return makeTransaction(transaction);
+            /*transactionRepository.insertWithQuery(transaction.getSourceAccount(),
+                    transaction.getTargetAccount(),
+                    transaction.getAmount(),
+                    transaction.getCurrencyName());
+            return makeTransaction(transaction);*/
+            sourceAccount.setBalance(sourceAccount.getBalance()-transaction.getAmount());
+            targetAccount.setBalance(targetAccount.getBalance()+transaction.getAmount());
+            accountRepository.save(sourceAccount);
+            accountRepository.save(targetAccount);
+            Transaction transact=new Transaction(sourceId,targetId,transaction.getAmount(),transaction.getCurrency());
+            transactionRepository.save(transact);
+            return 0;
         }
     }
 

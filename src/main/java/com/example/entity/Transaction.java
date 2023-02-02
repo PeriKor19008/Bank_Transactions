@@ -29,6 +29,13 @@ public class Transaction {
     @Column(nullable = false, name="currency")
     private Currency currency;
 
+    public Transaction (int sourceAccount,int targetAccount,double amount,Currency currency){
+        this.sourceAccount=sourceAccount;
+        this.targetAccount=targetAccount;
+        this.amount=amount;
+        this.currency=currency;
+    }
+
 }
 
 
