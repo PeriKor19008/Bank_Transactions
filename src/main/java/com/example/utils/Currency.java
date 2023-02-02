@@ -4,4 +4,6 @@ public enum Currency {
     EURO,
     US_DOLAR,
     GB_POUND
+
+
 }
